@@ -1,0 +1,502 @@
+/**
+ * AUTHOR: Diptadip Mallik
+ * GPLv3.0
+*/
+import javax.swing.UIManager.LookAndFeelInfo;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseWheelEvent;
+import java.awt.event.MouseWheelListener;
+import javax.swing.border.Border;
+import javax.swing.*;
+ 
+ 
+public class TicTacToe extends JFrame {
+ 
+    private JMenuBar menuBar;
+    private JButton start;
+    private JButton btn1;
+    private JButton btn2;
+    private JButton btn3;
+    private JButton btn4;
+    private JButton btn5;
+    private JButton btn6;
+    private JButton btn7;
+    private JButton btn8;
+    private JButton btn9;
+    private JButton reset;
+    private JTextField p1;
+    private JTextField p2;
+    private JPanel panel2;
+    private JTextArea result;
+ 
+    //Constructor
+    public TicTacToe(){
+ 
+        this.setTitle("TicTacToe");
+        this.setSize(300,500);
+        //menu generate method
+        generateMenu();
+        this.setJMenuBar(menuBar);
+ 
+        //pane with null layout
+        JPanel contentPane = new JPanel(null);
+        contentPane.setPreferredSize(new Dimension(300,500));
+        contentPane.setBackground(new Color(0,255,255));
+ 
+ 
+        start = new JButton();
+        start.setBounds(55,68,90,35);
+        start.setBackground(new Color(102,255,0));
+        start.setForeground(new Color(255,255,255));
+        start.setEnabled(true);
+        start.setFont(new Font("SansSerif",0,15));
+        start.setText("Start");
+        start.setVisible(true);
+ 
+        btn1 = new JButton();
+        btn1.setBounds(5,5,90,90);
+        btn1.setBackground(new Color(214,217,223));
+        btn1.setForeground(new Color(0,0,0));
+        btn1.setEnabled(true);
+        btn1.setFont(new Font("SansSerif",0,72));
+        btn1.setText("");
+        btn1.setVisible(true);
+ 
+        btn2 = new JButton();
+        btn2.setBounds(94,5,90,90);
+        btn2.setBackground(new Color(214,217,223));
+        btn2.setForeground(new Color(0,0,0));
+        btn2.setEnabled(true);
+        btn2.setFont(new Font("SansSerif",0,72));
+        btn2.setText("");
+        btn2.setVisible(true);
+ 
+        btn3 = new JButton();
+        btn3.setBounds(185,5,90,90);
+        btn3.setBackground(new Color(214,217,223));
+        btn3.setForeground(new Color(0,0,0));
+        btn3.setEnabled(true);
+        btn3.setFont(new Font("SansSerif",0,72));
+        btn3.setText("");
+        btn3.setVisible(true);
+ 
+        btn4 = new JButton();
+        btn4.setBounds(5,95,90,90);
+        btn4.setBackground(new Color(214,217,223));
+        btn4.setForeground(new Color(0,0,0));
+        btn4.setEnabled(true);
+        btn4.setFont(new Font("SansSerif",0,72));
+        btn4.setText("");
+        btn4.setVisible(true);
+ 
+        btn5 = new JButton();
+        btn5.setBounds(96,95,90,90);
+        btn5.setBackground(new Color(214,217,223));
+        btn5.setForeground(new Color(0,0,0));
+        btn5.setEnabled(true);
+        btn5.setFont(new Font("SansSerif",0,72));
+        btn5.setText("");
+        btn5.setVisible(true);
+ 
+        btn6 = new JButton();
+        btn6.setBounds(185,94,90,90);
+        btn6.setBackground(new Color(214,217,223));
+        btn6.setForeground(new Color(0,0,0));
+        btn6.setEnabled(true);
+        btn6.setFont(new Font("SansSerif",0,72));
+        btn6.setText("");
+        btn6.setVisible(true);
+ 
+        btn7 = new JButton();
+        btn7.setBounds(5,185,90,90);
+        btn7.setBackground(new Color(214,217,223));
+        btn7.setForeground(new Color(0,0,0));
+        btn7.setEnabled(true);
+        btn7.setFont(new Font("SansSerif",0,72));
+        btn7.setText("");
+        btn7.setVisible(true);
+ 
+        btn8 = new JButton();
+        btn8.setBounds(95,185,90,90);
+        btn8.setBackground(new Color(214,217,223));
+        btn8.setForeground(new Color(0,0,0));
+        btn8.setEnabled(true);
+        btn8.setFont(new Font("SansSerif",0,72));
+        btn8.setText("");
+        btn8.setVisible(true);
+ 
+        btn9 = new JButton();
+        btn9.setBounds(185,185,90,90);
+        btn9.setBackground(new Color(214,217,223));
+        btn9.setForeground(new Color(0,0,0));
+        btn9.setEnabled(true);
+        btn9.setFont(new Font("SansSerif",0,72));
+        btn9.setText("");
+        btn9.setVisible(true);
+ 
+        p1 = new JTextField();
+        p1.setBounds(5,5,145,35);
+        p1.setBackground(new Color(0,0,0));
+        p1.setForeground(new Color(255,255,255));
+        p1.setEnabled(true);
+        p1.setFont(new Font("sansserif",0,12));
+        p1.setText("Player 1 ");
+        p1.setVisible(true);
+ 
+        p2 = new JTextField();
+        p2.setBounds(150,5,145,35);
+        p2.setBackground(new Color(0,0,0));
+        p2.setForeground(new Color(255,255,255));
+        p2.setEnabled(true);
+        p2.setFont(new Font("sansserif",0,12));
+        p2.setText("Player 2");
+        p2.setVisible(true);
+ 
+        panel2 = new JPanel(null);
+        panel2.setBorder(BorderFactory.createEtchedBorder(1));
+        panel2.setBounds(10,124,280,280);
+        panel2.setBackground(new Color(255,0,255));
+        panel2.setForeground(new Color(0,0,0));
+        panel2.setEnabled(true);
+        panel2.setFont(new Font("sansserif",0,12));
+        panel2.setVisible(true);
+ 
+        reset = new JButton();
+        reset.setBounds(159,68,90,35);
+        reset.setBackground(new Color(255,51,0));
+        reset.setForeground(new Color(255,255,255));
+        reset.setEnabled(true);
+        reset.setFont(new Font("SansSerif",0,15));
+        reset.setText("Reset");
+        reset.setVisible(true);
+       
+ 
+        result = new JTextArea();
+        result.setBounds(9,409,280,80);
+        result.setBackground(new Color(0,0,0));
+        result.setForeground(new Color(255,0,255));
+        result.setEnabled(true);
+        result.setFont(new Font("SansSerif",0,15));
+        result.setText("Player 1 gives O");
+        result.setBorder(BorderFactory.createBevelBorder(1));
+        result.setVisible(true);
+ 
+        //adding components to contentPane panel
+        contentPane.add(start);
+        panel2.add(btn1);
+        panel2.add(btn2);
+        panel2.add(btn3);
+        panel2.add(btn4);
+        panel2.add(btn5);
+        panel2.add(btn6);
+        panel2.add(btn7);
+        panel2.add(btn8);
+        panel2.add(btn9);
+        contentPane.add(p1);
+        contentPane.add(p2);
+        contentPane.add(panel2);
+        contentPane.add(reset);
+        contentPane.add(result);
+ 
+        //adding panel to JFrame and seting of window position and close operation
+        this.add(contentPane);
+        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.setLocationRelativeTo(null);
+        this.pack();
+        this.setVisible(true);
+       
+        btn1.addMouseListener(new MouseAdapter(){
+            public void mouseClicked(MouseEvent evt){
+                play(evt,1);
+            }
+        });
+        btn2.addMouseListener(new MouseAdapter(){
+            public void mouseClicked(MouseEvent evt){
+                play(evt,2);
+            }
+        });
+        btn3.addMouseListener(new MouseAdapter(){
+            public void mouseClicked(MouseEvent evt){
+                play(evt,3);
+            }
+        });
+        btn4.addMouseListener(new MouseAdapter(){
+            public void mouseClicked(MouseEvent evt){
+                play(evt,4);
+            }
+        });
+        btn5.addMouseListener(new MouseAdapter(){
+            public void mouseClicked(MouseEvent evt){
+                play(evt,5);
+            }
+        });
+        btn6.addMouseListener(new MouseAdapter(){
+            public void mouseClicked(MouseEvent evt){
+                play(evt,6);
+            }
+        });
+        btn7.addMouseListener(new MouseAdapter(){
+            public void mouseClicked(MouseEvent evt){
+                play(evt,7);
+            }
+        });
+        btn8.addMouseListener(new MouseAdapter(){
+            public void mouseClicked(MouseEvent evt){
+                play(evt,8);
+            }
+        });
+        btn9.addMouseListener(new MouseAdapter(){
+            public void mouseClicked(MouseEvent evt){
+                play(evt,9);
+            }
+        });
+       
+        reset.addMouseListener(new MouseAdapter() {
+            public void mouseClicked(MouseEvent evt) {
+                reset(evt);
+            }
+        });
+        start.addMouseListener(new MouseAdapter() {
+            public void mouseClicked(MouseEvent evt) {
+                start(evt);
+            }
+        });
+    }
+    private String p1_name;
+    private String p2_name;
+    private boolean started=false;
+    private int high=1;
+    private int[][]arr=new int[3][3];
+    private boolean isEmpty(int botam){
+        String s=new String();
+        switch(botam){
+               
+                case 1: s=btn1.getText();
+                        break;
+                case 2: s=btn2.getText();
+                        break;
+                case 3: s=btn3.getText();
+                        break;
+                case 4: s=btn4.getText();
+                        break;
+                case 5: s=btn5.getText();
+                        break;
+                case 6: s=btn6.getText();
+                        break;
+                case 7: s=btn7.getText();
+                        break;
+                case 8: s=btn8.getText();
+                        break;
+                case 9: s=btn9.getText();
+                        break;
+        }
+        return (s.equalsIgnoreCase(""));
+    }
+    private void play(MouseEvent evt,int botam){
+       
+        if(high==1 && started && isEmpty(botam)){
+            switch(botam){
+               
+                case 1: btn1.setText("O");arr[0][0]=1;
+                        break;
+                case 2: btn2.setText("O");arr[0][1]=1;
+                        break;
+                case 3: btn3.setText("O");arr[0][2]=1;
+                        break;
+                case 4: btn4.setText("O");arr[1][0]=1;
+                        break;
+                case 5: btn5.setText("O");arr[1][1]=1;
+                        break;
+                case 6: btn6.setText("O");arr[1][2]=1;
+                        break;
+                case 7: btn7.setText("O");arr[2][0]=1;
+                        break;
+                case 8: btn8.setText("O");arr[2][1]=1;
+                        break;
+                case 9: btn9.setText("O");arr[2][2]=1;
+                        break;
+            }
+            result.setText(p2_name+" will give X");
+            high=2;
+            ifWin();
+        }
+        else if(high==2 && started && isEmpty(botam)){
+            switch(botam){
+                case 1: btn1.setText("X");arr[0][0]=2;
+                        break;
+                case 2: btn2.setText("X");arr[0][1]=2;
+                        break;
+                case 3: btn3.setText("X");arr[0][2]=2;
+                        break;
+                case 4: btn4.setText("X");arr[1][0]=2;
+                        break;
+                case 5: btn5.setText("X");arr[1][1]=2;
+                        break;
+                case 6: btn6.setText("X");arr[1][2]=2;
+                        break;
+                case 7: btn7.setText("X");arr[2][0]=2;
+                        break;
+                case 8: btn8.setText("X");arr[2][1]=2;
+                        break;
+                case 9: btn9.setText("X");arr[2][2]=2;
+                        break;
+            }
+            result.setText(p1_name+" will give O");
+            high=1;
+            ifWin();
+        }
+        if(win()==0 && isArrayFilled()){
+            setToDefault();
+            result.setText("Draw Match !!");
+           
+        }
+           
+    }
+    private int win(){
+        //checking horizontal lines
+        for(int i=0;i<3;i++){
+            if(arr[i][0]==1 && arr[i][1]==1 && arr[i][2]==1){
+                return 1;
+            }
+            if(arr[i][0]==2 && arr[i][1]==2 && arr[i][2]==2){
+                return 2;
+            }
+        }
+        //checking vertical lines
+        for(int j=0;j<3;j++){
+            if(arr[0][j]==1 && arr[1][j]==1 && arr[2][j]==1){
+                return 1;
+            }
+            if(arr[0][j]==2 && arr[1][j]==2 && arr[2][j]==2){
+                return 2;
+            }
+        }
+        //checking primary diagonal
+        if(arr[0][0]==1 && arr[1][1]==1 && arr[2][2]==1)
+            return 1;
+        if(arr[0][0]==2 && arr[1][1]==2 && arr[2][2]==2)
+            return 2;
+        return 0;
+    }
+    public void ifWin()
+    {
+        int r=win();
+       
+        if(r==1){
+            setToDefault();
+            result.setText(p1_name+" has won the match !!");
+           
+        }
+        if(r==2){
+            setToDefault();
+            result.setText(p2_name+" has won the match !!");
+           
+        }
+       
+    }
+    private boolean isArrayFilled()
+    {
+        int c=0;
+        for(int i=0;i<3;i++){
+            for(int j=0;j<3;j++){
+                if(arr[i][j]!=0)
+                    c++;
+            }
+        }
+        if(c==9)
+            return true;
+        return false;
+    }
+    private void zeroFill()
+    {
+        for(int i=0;i<3;i++){
+            for(int j=0;j<3;j++){
+                arr[i][j]=0;
+            }
+        }
+    }
+    private void print(){
+        for(int i=0;i<3;i++){
+            for(int j=0;j<3;j++){
+                System.out.print(arr[i][j]);
+            }
+            System.out.println();
+        }
+    }
+    private void start(MouseEvent evt){
+        //System.out.println(evt.toString());
+        p1_name=p1.getText();
+        p2_name=p2.getText();
+        result.setText(p1_name+" will begin with O");
+        started=true;
+    }
+    private void setToDefault()
+    {
+        //System.out.println(evt.toString());
+        btn1.setText("");
+        btn2.setText("");
+        btn3.setText("");
+        btn4.setText("");
+        btn5.setText("");
+        btn6.setText("");
+        btn7.setText("");
+        btn8.setText("");
+        btn9.setText("");
+        result.setText("Player 1 gives O");
+        p1.setText("Player 1 ");
+        p2.setText("Player 2 ");
+        started=false;
+        zeroFill();
+    }
+    private void reset (MouseEvent evt) {
+        //TODO
+        //System.out.println(evt.toString());
+        setToDefault();
+    }
+    //method for generate menu
+    public void generateMenu(){
+        menuBar = new JMenuBar();
+ 
+        JMenu file = new JMenu("File");
+        JMenu tools = new JMenu("Tools");
+        JMenu help = new JMenu("Help");
+ 
+        JMenuItem open = new JMenuItem("Open   ");
+        JMenuItem save = new JMenuItem("Save   ");
+        JMenuItem exit = new JMenuItem("Exit   ");
+        JMenuItem preferences = new JMenuItem("Preferences   ");
+        JMenuItem about = new JMenuItem("About   ");
+ 
+ 
+        file.add(open);
+        file.add(save);
+        file.addSeparator();
+        file.add(exit);
+        tools.add(preferences);
+        help.add(about);
+ 
+        menuBar.add(file);
+        menuBar.add(tools);
+        menuBar.add(help);
+       
+       
+    }
+   
+ 
+ 
+    public static void main(String[] args){
+        System.setProperty("swing.defaultlaf", "com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel");
+        javax.swing.SwingUtilities.invokeLater(new Runnable() {
+            public void run() {
+                new TicTacToe();
+            }
+        });
+    }
+ 
+}
